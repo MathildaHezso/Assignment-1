@@ -1,20 +1,24 @@
 package model;
 
-import java.util.ArrayList;
+public class Student {
 
-public class Student  {
-
-	private int ssn;
+	private String ssn;
 	private String name;
 	private String address;
-	private String mail;
-	private ArrayList<Course> courses = new ArrayList<Course>();
+	private String email;
 
-	public int getSsn() {
+	public Student(String ssn, String name, String address, String email) {
+		this.ssn = ssn;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+	}
+
+	public String getSsn() {
 		return ssn;
 	}
 
-	public void setSsn(int ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 
@@ -34,19 +38,12 @@ public class Student  {
 		this.address = address;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public ArrayList<Course> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
-	}
 }
