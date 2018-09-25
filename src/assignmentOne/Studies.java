@@ -5,7 +5,7 @@ public class Studies {
 	private int studentSsn;
 	private String courseCode;
 
-	public int getStudentSsn() {
+	public int getStudentSsn()  {
 		return studentSsn;
 	}
 

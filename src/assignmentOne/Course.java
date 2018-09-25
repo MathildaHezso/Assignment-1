@@ -9,7 +9,7 @@ public class Course {
 	private int credit;
 	private ArrayList<Student> students = new ArrayList<Student>();
 
-	public String getCourseCode() {
+	public String getCourseCode()  {
 		return courseCode;
 	}
 

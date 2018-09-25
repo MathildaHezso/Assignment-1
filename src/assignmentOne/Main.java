@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
