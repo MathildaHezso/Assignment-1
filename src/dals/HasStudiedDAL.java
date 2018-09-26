@@ -66,8 +66,6 @@ public class HasStudiedDAL {
 			
 			ResultSet rs = state.executeQuery();
 			if(rs.next()) {
-			//	String studentSsn = rs.getString("studentSsn");
-				//String courseCode = rs.getString("courseCode");
 				int grade = rs.getInt("grade");
 				
 				return new HasStudied(studentSsn, courseCode, grade);
@@ -78,5 +76,28 @@ public class HasStudiedDAL {
 		DatabaseConnection.closeResources(con, state);
 	}
 	}
-
+	 public ArrayList<HasStudied> getAllHasStudied(String courseCode) throws SQLException {
+		 Connection con = null;
+		 PreparedStatement state = null;
+		 
+		 try {
+			 con = DatabaseConnection.getConnection();
+			 state = con.prepareStatement("SELECT * FROM Studied WHERE courseCode = ? ORDER BY grade");
+			 
+			 state.setString(1, courseCode);
+	         
+			 ResultSet rs = state.executeQuery();
+	            ArrayList<HasStudied> hasStudied = new ArrayList<>();
+	            while (rs.next()) {
+	                String studentSsn = rs.getString("studentSsn");
+	                int grade = rs.getInt("grade");
+	                
+	                HasStudied studied = new HasStudied(studentSsn, courseCode, grade);
+	                hasStudied.add(studied);
+	            }
+	            return hasStudied;
+	        } finally {
+	        	 DatabaseConnection.closeResources(con, state);
+	        }
+	    }
 }
