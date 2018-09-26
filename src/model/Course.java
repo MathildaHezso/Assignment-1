@@ -1,15 +1,18 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Course {
 
 	private String courseCode;
 	private String courseName;
 	private int credit;
-	private ArrayList<Student> students = new ArrayList<Student>();
+	
+	public Course(String courseCode, String courseName, int credit) {
+		this.courseCode = courseCode; 
+		this.courseName = courseName; 
+		this.credit = credit; 
+	}
 
-	public String getCourseCode()     {
+	public String getCourseCode() {
 		return courseCode;
 	}
 
@@ -33,11 +36,4 @@ public class Course {
 		this.credit = credit;
 	}
 
-	public void setStudents(ArrayList<Student> students) {
-		this.students = students;
-	}
-
-	public ArrayList<Student> getStudents() {
-		return students;
-	}
-
+}

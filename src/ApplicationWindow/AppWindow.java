@@ -22,6 +22,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JComboBox;
+import javax.swing.JSeparator;
 
 public class AppWindow {
 
@@ -60,7 +62,7 @@ public class AppWindow {
 	 */
 	public AppWindow() {
 		
-		Connection = 
+		
 		
 		initialize();
 	}
@@ -70,7 +72,7 @@ public class AppWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 588, 539);
+		frame.setBounds(100, 100, 588, 591);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -105,7 +107,7 @@ public class AppWindow {
 		studentsTab.add(lblSsn);
 		
 		ssnTextField = new JTextField();
-		ssnTextField.setBounds(75, 18, 266, 20);
+		ssnTextField.setBounds(71, 18, 441, 20);
 		studentsTab.add(ssnTextField);
 		ssnTextField.setColumns(10);
 		
@@ -114,12 +116,12 @@ public class AppWindow {
 		studentsTab.add(lblStudentName);
 		
 		nameTextFiled = new JTextField();
-		nameTextFiled.setBounds(75, 83, 266, 20);
+		nameTextFiled.setBounds(71, 83, 441, 20);
 		studentsTab.add(nameTextFiled);
 		nameTextFiled.setColumns(10);
 		
 		addressTextField = new JTextField();
-		addressTextField.setBounds(75, 114, 266, 20);
+		addressTextField.setBounds(71, 114, 441, 20);
 		studentsTab.add(addressTextField);
 		addressTextField.setColumns(10);
 		
@@ -128,7 +130,7 @@ public class AppWindow {
 		studentsTab.add(lblStudentAddress);
 		
 		emailTextField = new JTextField();
-		emailTextField.setBounds(75, 145, 266, 20);
+		emailTextField.setBounds(71, 145, 441, 20);
 		studentsTab.add(emailTextField);
 		emailTextField.setColumns(10);
 		
@@ -137,24 +139,40 @@ public class AppWindow {
 		studentsTab.add(lblEmail);
 		
 		table = new JTable();
-		table.setBounds(19, 341, 527, 80);
+		table.setBounds(71, 405, 441, 80);
 		studentsTab.add(table);
 		
 		table_2 = new JTable();
-		table_2.setBounds(19, 225, 527, 80);
+		table_2.setBounds(71, 238, 441, 80);
 		studentsTab.add(table_2);
 		
 		JButton btnAddStudent = new JButton("Add student");
-		btnAddStudent.setBounds(75, 176, 266, 23);
+		btnAddStudent.setBounds(71, 176, 441, 23);
 		studentsTab.add(btnAddStudent);
 		
-		JButton btnRemoveStudent = new JButton("New button");
-		btnRemoveStudent.setBounds(228, 49, 113, 23);
+		JButton btnRemoveStudent = new JButton("Remove student");
+		btnRemoveStudent.setBounds(313, 49, 199, 23);
 		studentsTab.add(btnRemoveStudent);
 		
 		JButton btnFindStudent = new JButton("Find student");
-		btnFindStudent.setBounds(75, 49, 113, 23);
+		btnFindStudent.setBounds(70, 49, 199, 23);
 		studentsTab.add(btnFindStudent);
+		
+		JLabel lblExistingStudents = new JLabel("Existing students");
+		lblExistingStudents.setBounds(71, 224, 132, 14);
+		studentsTab.add(lblExistingStudents);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 336, 577, 12);
+		studentsTab.add(separator);
+		
+		JLabel lblCourses = new JLabel("Courses");
+		lblCourses.setBounds(19, 380, 46, 14);
+		studentsTab.add(lblCourses);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(484, 359, 28, 20);
+		studentsTab.add(comboBox);
 		
 		JPanel coursesTab = new JPanel();
 		tabbedPane.addTab("Courses", null, coursesTab, null);
@@ -202,14 +220,5 @@ public class AppWindow {
 		JButton btnNewButton_7 = new JButton("New button");
 		btnNewButton_7.setBounds(454, 79, 89, 23);
 		coursesTab.add(btnNewButton_7);
-		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JMenu mnExit = new JMenu("File");
-		menuBar.add(mnExit);
-		
-		JMenuItem mntmExit = new JMenuItem("Exit");
-		mnExit.add(mntmExit);
 	}
 }

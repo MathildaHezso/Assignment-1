@@ -2,14 +2,19 @@ package model;
 
 public class Studies {
 
-	private int studentSsn;
+	private String studentSsn;
 	private String courseCode;
+	
+	public Studies(String studentSsn, String courseCode) {
+		this.studentSsn = studentSsn; 
+		this.courseCode = courseCode; 
+	}
 
-	public int getStudentSsn()  {
+	public String getStudentSsn()  {
 		return studentSsn;
 	}
 
-	public void setStudentSsn(int studentSsn) {
+	public void setStudentSsn(String studentSsn) {
 		this.studentSsn = studentSsn;
 	}
 
