@@ -54,7 +54,7 @@ public class CourseDAL {
             DatabaseConnection.closeResources(con, state);
         }
     }
-    public ArrayList<String> getCoursesCourseCode() throws SQLException {
+    /*public ArrayList<String> getCoursesCourseCode() throws SQLException {
         Connection con = null;
         PreparedStatement state = null;
         try {
@@ -72,7 +72,7 @@ public class CourseDAL {
         } finally {
             DatabaseConnection.closeResources(con, state);
         }
-    }
+    }*/
     
     public boolean insertCourse(Course c) throws SQLException {
         String courseCode = c.getCourseCode();
@@ -83,7 +83,7 @@ public class CourseDAL {
         PreparedStatement state = null;
         try {
             con = DatabaseConnection.getConnection();
-            state = con.prepareStatement("INSERT INTO Course CALUES(?. ?, ?)");
+            state = con.prepareStatement("INSERT INTO Course VALUES(?, ?, ?)");
             state.setString(1, courseCode);
             state.setString(2, courseName);
             state.setInt(3, credit);

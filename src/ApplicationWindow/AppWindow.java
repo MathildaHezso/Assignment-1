@@ -28,17 +28,6 @@ import javax.swing.JSeparator;
 public class AppWindow {
 
 	private JFrame frame;
-	private JTextField ssnTextField;
-	private JTextField nameTextFiled;
-	private JTextField addressTextField;
-	private JTextField emailTextField;
-	private JTable table;
-	private JTable tableStudentsAndCourses;
-	private JTable table_2;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTable table_3;
 
 	/**
 	 * Launch the application.
@@ -57,6 +46,13 @@ public class AppWindow {
 	}
 
 	Connection con = null;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 	/**
 	 * Create the application.
 	 */
@@ -78,147 +74,100 @@ public class AppWindow {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel directoryTab = new JPanel();
-		tabbedPane.addTab("Directory", null, directoryTab, null);
-		directoryTab.setLayout(null);
+		JTabbedPane tabbedPane_Assignment1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Assignment 1", null, tabbedPane_Assignment1, null);
 		
-		JButton btnShowStudents = new JButton("Show Student(s)");
-		btnShowStudents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnShowStudents.setBounds(31, 29, 236, 23);
-		directoryTab.add(btnShowStudents);
+		JPanel panel = new JPanel();
+		tabbedPane_Assignment1.addTab("Overview", null, panel, null);
+		panel.setLayout(null);
 		
-		JButton btnSowCourses = new JButton("Show course(s)");
-		btnSowCourses.setBounds(303, 29, 236, 23);
-		directoryTab.add(btnSowCourses);
+		JPanel panel_1 = new JPanel();
+		tabbedPane_Assignment1.addTab("Add/find/remove", null, panel_1, null);
+		panel_1.setLayout(null);
 		
-		tableStudentsAndCourses = new JTable();
-		tableStudentsAndCourses.setBounds(31, 86, 508, 156);
-		directoryTab.add(tableStudentsAndCourses);
+		JLabel lblAddFind = new JLabel("Add / FInd / Delete Student");
+		lblAddFind.setBounds(51, 30, 149, 14);
+		panel_1.add(lblAddFind);
 		
-		JPanel studentsTab = new JPanel();
-		tabbedPane.addTab("Students", null, studentsTab, null);
-		studentsTab.setLayout(null);
+		JLabel lblAddFind_1 = new JLabel("Add / Find / Delete Course");
+		lblAddFind_1.setBounds(356, 30, 149, 14);
+		panel_1.add(lblAddFind_1);
 		
-		JLabel lblSsn = new JLabel("Ssn");
-		lblSsn.setBounds(19, 21, 46, 14);
-		studentsTab.add(lblSsn);
+		textField = new JTextField();
+		textField.setBounds(114, 55, 86, 20);
+		panel_1.add(textField);
+		textField.setColumns(10);
 		
-		ssnTextField = new JTextField();
-		ssnTextField.setBounds(71, 18, 441, 20);
-		studentsTab.add(ssnTextField);
-		ssnTextField.setColumns(10);
+		textField_1 = new JTextField();
+		textField_1.setBounds(114, 86, 86, 20);
+		panel_1.add(textField_1);
+		textField_1.setColumns(10);
 		
-		JLabel lblStudentName = new JLabel("Name");
-		lblStudentName.setBounds(19, 86, 46, 14);
-		studentsTab.add(lblStudentName);
+		textField_2 = new JTextField();
+		textField_2.setBounds(114, 117, 86, 20);
+		panel_1.add(textField_2);
+		textField_2.setColumns(10);
 		
-		nameTextFiled = new JTextField();
-		nameTextFiled.setBounds(71, 83, 441, 20);
-		studentsTab.add(nameTextFiled);
-		nameTextFiled.setColumns(10);
-		
-		addressTextField = new JTextField();
-		addressTextField.setBounds(71, 114, 441, 20);
-		studentsTab.add(addressTextField);
-		addressTextField.setColumns(10);
-		
-		JLabel lblStudentAddress = new JLabel("Address");
-		lblStudentAddress.setBounds(19, 117, 46, 14);
-		studentsTab.add(lblStudentAddress);
-		
-		emailTextField = new JTextField();
-		emailTextField.setBounds(71, 145, 441, 20);
-		studentsTab.add(emailTextField);
-		emailTextField.setColumns(10);
-		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(19, 148, 46, 14);
-		studentsTab.add(lblEmail);
-		
-		table = new JTable();
-		table.setBounds(71, 405, 441, 80);
-		studentsTab.add(table);
-		
-		table_2 = new JTable();
-		table_2.setBounds(71, 238, 441, 80);
-		studentsTab.add(table_2);
-		
-		JButton btnAddStudent = new JButton("Add student");
-		btnAddStudent.setBounds(71, 176, 441, 23);
-		studentsTab.add(btnAddStudent);
-		
-		JButton btnRemoveStudent = new JButton("Remove student");
-		btnRemoveStudent.setBounds(313, 49, 199, 23);
-		studentsTab.add(btnRemoveStudent);
-		
-		JButton btnFindStudent = new JButton("Find student");
-		btnFindStudent.setBounds(70, 49, 199, 23);
-		studentsTab.add(btnFindStudent);
-		
-		JLabel lblExistingStudents = new JLabel("Existing students");
-		lblExistingStudents.setBounds(71, 224, 132, 14);
-		studentsTab.add(lblExistingStudents);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 336, 577, 12);
-		studentsTab.add(separator);
-		
-		JLabel lblCourses = new JLabel("Courses");
-		lblCourses.setBounds(19, 380, 46, 14);
-		studentsTab.add(lblCourses);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(484, 359, 28, 20);
-		studentsTab.add(comboBox);
-		
-		JPanel coursesTab = new JPanel();
-		tabbedPane.addTab("Courses", null, coursesTab, null);
-		coursesTab.setLayout(null);
-		
-		JLabel lblCourseCode = new JLabel("Course code");
-		lblCourseCode.setBounds(19, 21, 73, 14);
-		coursesTab.add(lblCourseCode);
+		textField_3 = new JTextField();
+		textField_3.setBounds(114, 148, 86, 20);
+		panel_1.add(textField_3);
+		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(88, 18, 356, 20);
-		coursesTab.add(textField_4);
+		textField_4.setBounds(402, 55, 86, 20);
+		panel_1.add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(88, 49, 356, 20);
-		coursesTab.add(textField_5);
+		textField_5.setBounds(402, 86, 86, 20);
+		panel_1.add(textField_5);
 		textField_5.setColumns(10);
 		
-		JLabel lblCourseName = new JLabel("Course name");
-		lblCourseName.setBounds(19, 52, 84, 14);
-		coursesTab.add(lblCourseName);
-		
 		textField_6 = new JTextField();
-		textField_6.setBounds(88, 80, 356, 20);
-		coursesTab.add(textField_6);
+		textField_6.setBounds(402, 117, 86, 20);
+		panel_1.add(textField_6);
 		textField_6.setColumns(10);
 		
-		JLabel lblCourseCredits = new JLabel("Credits");
-		lblCourseCredits.setBounds(19, 83, 46, 14);
-		coursesTab.add(lblCourseCredits);
+		JButton btnFindStudent = new JButton("Find Student");
+		btnFindStudent.setBounds(103, 179, 100, 23);
+		panel_1.add(btnFindStudent);
 		
-		table_3 = new JTable();
-		table_3.setBounds(19, 124, 524, 84);
-		coursesTab.add(table_3);
+		JButton btnRemoveStudent = new JButton("Remove Student");
+		btnRemoveStudent.setBounds(90, 213, 113, 23);
+		panel_1.add(btnRemoveStudent);
 		
-		JButton btnNewButton_5 = new JButton("New button");
-		btnNewButton_5.setBounds(454, 17, 89, 23);
-		coursesTab.add(btnNewButton_5);
+		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.setBounds(1, 179, 100, 23);
+		panel_1.add(btnAddStudent);
 		
-		JButton btnNewButton_6 = new JButton("New button");
-		btnNewButton_6.setBounds(454, 48, 89, 23);
-		coursesTab.add(btnNewButton_6);
+		JButton btnFindCourse = new JButton("Find Course");
+		btnFindCourse.setBounds(399, 179, 89, 23);
+		panel_1.add(btnFindCourse);
 		
-		JButton btnNewButton_7 = new JButton("New button");
-		btnNewButton_7.setBounds(454, 79, 89, 23);
-		coursesTab.add(btnNewButton_7);
+		JButton btnRemoveCourse = new JButton("Remove Course");
+		btnRemoveCourse.setBounds(392, 213, 113, 23);
+		panel_1.add(btnRemoveCourse);
+		
+		JButton btnAddCourse = new JButton("Add Course");
+		btnAddCourse.setBounds(298, 179, 89, 23);
+		panel_1.add(btnAddCourse);
+		
+		JLabel lblAddremoveStudentFrom = new JLabel("Add/Remove Student from Course");
+		lblAddremoveStudentFrom.setBounds(39, 298, 165, 14);
+		panel_1.add(lblAddremoveStudentFrom);
+		
+		JLabel lblAddCompletedCourse = new JLabel("Add Completed Course");
+		lblAddCompletedCourse.setBounds(369, 298, 119, 14);
+		panel_1.add(lblAddCompletedCourse);
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane_Assignment1.addTab("Search", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JTabbedPane tabbedPane_Assignment2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Assignment 2", null, tabbedPane_Assignment2, null);
+		
+		JTabbedPane tabbedPane_Assignment3 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Assignment 3", null, tabbedPane_Assignment3, null);
 	}
 }
