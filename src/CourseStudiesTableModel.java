@@ -4,14 +4,18 @@ import javax.swing.table.AbstractTableModel;
 import model.Studies;
 
 
-
 public class CourseStudiesTableModel extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3952316667534361289L;
 	private String [] columns;
-	private String[] data;
+	private String[][] data;
 	
 	private CourseStudiesTableModel() {
 		this.columns = new String[] {"SSn"};
+	}
 	
 	public CourseStudiesTableModel(List<Studies> studies) {
 		this();
@@ -31,12 +35,13 @@ public class CourseStudiesTableModel extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return this.columns(col);
 	}
-	@Override int getRowCount() {
+	@Override
+	public int getRowCount() {
 		return this.data.length;
 	}
 	@Override
 	public Object getValueAt (int rowIndex, int columnIndex) {
-	return this.data[rowIndex] [columnIndex;]
+	return this.data[rowIndex] [columnIndex];
 				
 	}
 
