@@ -1,6 +1,8 @@
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import model.Studies;
+
 
 
 public class CourseStudiesTableModel extends AbstractTableModel {
@@ -14,8 +16,27 @@ public class CourseStudiesTableModel extends AbstractTableModel {
 	public CourseStudiesTableModel(List<Studies> studies) {
 		this();
 		
-		this.data
+		this.data = new String[studies.size()][];
+		for (int i = 0; i<this.data.length; i++) {
+			Studies s = studies.get(i);
+			data[i] = new String[] { s.getStudentSsn() };
+			
+		}
 	}
+	@Override
+	public int getColumnCount() {
+		return this.columns.length;
+	}
+	@Override
+	public String getColumnName(int col) {
+		return this.columns(col);
+	}
+	@Override int getRowCount() {
+		return this.data.length;
+	}
+	@Override
+	public Object getValueAt (int rowIndex, int columnIndex) {
+	return this.data[rowIndex] [columnIndex;]
 				
 	}
 
