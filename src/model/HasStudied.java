@@ -2,15 +2,21 @@ package model;
 
 public class HasStudied {
 
-	private int studentSsn;
+	private String studentSsn;
 	private String courseCode;
 	private int grade;
+	
+	public HasStudied(String studentSsn, String courseCode, int grade) {
+		this.studentSsn = studentSsn; 
+		this.courseCode = courseCode; 
+		this.grade = grade; 
+	}
 
-	public int getStudentSsn() {
+	public String getStudentSsn() {
 		return studentSsn;
 	}
 
-	public void setStudentSsn(int studentSsn) {
+	public void setStudentSsn(String studentSsn) {
 		this.studentSsn = studentSsn;
 	}
 
