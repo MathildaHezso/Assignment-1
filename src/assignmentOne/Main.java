@@ -25,7 +25,7 @@ public class Main {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				System.out.println(rs.getString(1));
+				System.out.println(rs.getString(1)+ " " + rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
