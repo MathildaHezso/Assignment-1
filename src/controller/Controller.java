@@ -1,14 +1,13 @@
 package controller;
 
-import dals.StudentDAL;
-import dals.HasStudiedDAL;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dals.CourseDAL;
 import dals.StudiesDAL;
+import dals.StudentDAL;
+import dals.HasStudiedDAL;
 
 import model.Student;
 import model.Course;
@@ -20,13 +19,13 @@ public class Controller {
 	private StudentDAL sDAL;
 	private CourseDAL cDAL;
 	private StudiesDAL stDAL;
-	private HasStudied hsDAL;
+	private HasStudiedDAL hsDAL;
 
 	public Controller() {
 		this.sDAL = new StudentDAL();
 		this.cDAL = new CourseDAL();
 		this.stDAL = new StudiesDAL();
-		this.hsDAL = new HasStudied();
+		this.hsDAL = new HasStudiedDAL();
 	}
 
 	public List<Student> getAllStudents() throws SQLException {
@@ -86,4 +85,20 @@ public class Controller {
 		return this.stDAL.removeStudies(studentSsn, courseCode);
 	}
 
+	public boolean insertHasStudied(HasStudied hasStudied) throws SQLException {   
+		return this.hsDAL.insertHasStudied(hasStudied);
+	}
+
+	public HasStudied getHasStudied(String studentSsn, String courseCode) throws SQLException {
+		return this.hsDAL.getHasStudied(studentSsn, courseCode);
+
+	}
+
+	public ArrayList<HasStudied> getAllHasStudied(String courseCode) throws SQLException {
+		return this.hsDAL.getAllHasStudied(courseCode);
+	}
+
+	public boolean removeHasStudied(String studentSsn, String courseCode) throws SQLException {
+		return this.hsDAL.removeHasStudied(studentSsn, courseCode);
+	}
 }

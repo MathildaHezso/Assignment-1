@@ -12,7 +12,7 @@ import databaseConnection.DatabaseConnection;
 
 public class HasStudiedDAL {
 	
-    public boolean insertHasStudued(HasStudied hasStudied) throws SQLException {
+    public boolean insertHasStudied(HasStudied hasStudied) throws SQLException {
       	 String studentSsn = hasStudied.getStudentSsn();
       	 String courseCode = hasStudied.getCourseCode();
       	 int grade = hasStudied.getGrade();
@@ -36,7 +36,7 @@ public class HasStudiedDAL {
       	 }
        }
        
-       public boolean deleteHasStudied(String studentSsn, String courseCode) throws SQLException {
+       public boolean removeHasStudied(String studentSsn, String courseCode) throws SQLException {
       	 Connection con = null;
       	 PreparedStatement state = null;
       	 try {
