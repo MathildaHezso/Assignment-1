@@ -312,11 +312,6 @@ public class AppWindow {
 		lblResultForCompleted.setBounds(90, 25, 117, 14);
 		panel_2.add(lblResultForCompleted);
 		
-		JLabel lblResultForCourse = new JLabel("Course Results");
-		lblResultForCourse.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblResultForCourse.setBounds(333, 25, 100, 14);
-		panel_2.add(lblResultForCourse);
-		
 		textField_7 = new JTextField();
 		textField_7.setBounds(135, 66, 86, 20);
 		panel_2.add(textField_7);
@@ -371,6 +366,11 @@ public class AppWindow {
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.setBounds(309, 155, 167, 171);
 		panel_2.add(textPane_4);
+		
+		JLabel lblCourseResults = new JLabel("Course Results");
+		lblCourseResults.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCourseResults.setBounds(354, 25, 86, 14);
+		panel_2.add(lblCourseResults);
 		
 		JTabbedPane tabbedPane_Assignment2 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Assignment 2", null, tabbedPane_Assignment2, null);
