@@ -9,11 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JTextArea;
-import javax.swing.JTable;
 import java.sql.Connection;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,18 +17,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
 import javax.swing.JSpinner;
 import java.awt.List;
-import java.awt.Label;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JList;
 import java.awt.Component;
-import javax.swing.JProgressBar;
 
 public class AppWindow {
 
