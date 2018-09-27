@@ -98,18 +98,39 @@ public class AppWindow {
 		tabbedPane_Assignment1.addTab("Overview", null, panel, null);
 		panel.setLayout(null);
 		
+		JButton btnShowStudents = new JButton("Show All Students");
+		btnShowStudents.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnShowStudents.setBounds(118, 78, 140, 23);
+		panel.add(btnShowStudents);
+		
+		JButton btnShowCourses = new JButton("Show All Courses");
+		btnShowCourses.setBounds(295, 78, 140, 23);
+		panel.add(btnShowCourses);
+		
+		JTextPane textPane_5 = new JTextPane();
+		textPane_5.setBounds(41, 112, 482, 261);
+		panel.add(textPane_5);
+		
+		JLabel lblOverview = new JLabel("OVERVIEW");
+		lblOverview.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblOverview.setBounds(236, 33, 80, 14);
+		panel.add(lblOverview);
+		
 		JPanel panel_1 = new JPanel();
 		tabbedPane_Assignment1.addTab("Administration", null, panel_1, null);
 		panel_1.setLayout(null);
 		
 		JLabel lblAddFind = new JLabel("Add / Find / Remove Student");
 		lblAddFind.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAddFind.setBounds(51, 30, 173, 14);
+		lblAddFind.setBounds(29, 30, 195, 14);
 		panel_1.add(lblAddFind);
 		
 		JLabel lblAddFind_1 = new JLabel("Add / Find / Remove Course");
 		lblAddFind_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAddFind_1.setBounds(329, 30, 176, 14);
+		lblAddFind_1.setBounds(319, 30, 186, 14);
 		panel_1.add(lblAddFind_1);
 		
 		textField = new JTextField();
@@ -313,26 +334,26 @@ public class AppWindow {
 		panel_2.add(lblResultForCompleted);
 		
 		textField_7 = new JTextField();
-		textField_7.setBounds(135, 66, 86, 20);
+		textField_7.setBounds(116, 66, 105, 20);
 		panel_2.add(textField_7);
 		textField_7.setColumns(10);
 		
 		textField_8 = new JTextField();
-		textField_8.setBounds(135, 94, 86, 20);
+		textField_8.setBounds(116, 94, 105, 20);
 		panel_2.add(textField_8);
 		textField_8.setColumns(10);
 		
 		textField_9 = new JTextField();
-		textField_9.setBounds(367, 65, 95, 20);
+		textField_9.setBounds(371, 64, 105, 20);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		
 		JButton btnShowGrade = new JButton("Show grade");
-		btnShowGrade.setBounds(132, 125, 89, 23);
+		btnShowGrade.setBounds(116, 124, 105, 23);
 		panel_2.add(btnShowGrade);
 		
 		JButton btnShowResult = new JButton("Show result");
-		btnShowResult.setBounds(367, 93, 95, 23);
+		btnShowResult.setBounds(371, 91, 105, 23);
 		panel_2.add(btnShowResult);
 		
 		JLabel lblCourseCode_3 = new JLabel("Course Code:");
@@ -340,11 +361,11 @@ public class AppWindow {
 		panel_2.add(lblCourseCode_3);
 		
 		JLabel lblStudentSsn_2 = new JLabel("Student SSN:");
-		lblStudentSsn_2.setBounds(52, 69, 64, 14);
+		lblStudentSsn_2.setBounds(37, 69, 79, 14);
 		panel_2.add(lblStudentSsn_2);
 		
 		JLabel lblCourseCode_4 = new JLabel("Course Code:");
-		lblCourseCode_4.setBounds(53, 97, 72, 14);
+		lblCourseCode_4.setBounds(37, 97, 88, 14);
 		panel_2.add(lblCourseCode_4);
 		
 		JSeparator separator_1 = new JSeparator();
