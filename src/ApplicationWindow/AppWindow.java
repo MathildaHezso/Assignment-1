@@ -33,6 +33,7 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JList;
 import java.awt.Component;
+import javax.swing.JProgressBar;
 
 public class AppWindow {
 
@@ -306,14 +307,14 @@ public class AppWindow {
 		tabbedPane_Assignment1.addTab("Search", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		JLabel lblResultForCompleted = new JLabel("Student resuts on Course:");
+		JLabel lblResultForCompleted = new JLabel("Student Resuts");
 		lblResultForCompleted.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblResultForCompleted.setBounds(56, 25, 165, 14);
+		lblResultForCompleted.setBounds(90, 25, 117, 14);
 		panel_2.add(lblResultForCompleted);
 		
-		JLabel lblResultForCourse = new JLabel("RESULT for Course");
+		JLabel lblResultForCourse = new JLabel("Course Results");
 		lblResultForCourse.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblResultForCourse.setBounds(327, 25, 135, 14);
+		lblResultForCourse.setBounds(333, 25, 100, 14);
 		panel_2.add(lblResultForCourse);
 		
 		textField_7 = new JTextField();
@@ -327,7 +328,7 @@ public class AppWindow {
 		textField_8.setColumns(10);
 		
 		textField_9 = new JTextField();
-		textField_9.setBounds(376, 65, 86, 20);
+		textField_9.setBounds(367, 65, 95, 20);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		
@@ -336,11 +337,11 @@ public class AppWindow {
 		panel_2.add(btnShowGrade);
 		
 		JButton btnShowResult = new JButton("Show result");
-		btnShowResult.setBounds(373, 96, 89, 23);
+		btnShowResult.setBounds(367, 93, 95, 23);
 		panel_2.add(btnShowResult);
 		
 		JLabel lblCourseCode_3 = new JLabel("Course Code:");
-		lblCourseCode_3.setBounds(302, 68, 79, 14);
+		lblCourseCode_3.setBounds(293, 69, 79, 14);
 		panel_2.add(lblCourseCode_3);
 		
 		JLabel lblStudentSsn_2 = new JLabel("Student SSN:");
@@ -368,7 +369,7 @@ public class AppWindow {
 		panel_2.add(lblResult);
 		
 		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setBounds(318, 167, 165, 159);
+		textPane_4.setBounds(309, 155, 167, 171);
 		panel_2.add(textPane_4);
 		
 		JTabbedPane tabbedPane_Assignment2 = new JTabbedPane(JTabbedPane.TOP);
