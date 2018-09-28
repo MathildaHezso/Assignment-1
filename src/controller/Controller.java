@@ -14,8 +14,10 @@ import model.Course;
 import model.Studies;
 import model.HasStudied;
 
-public class Controller {
 
+
+public class Controller {
+	
 	private StudentDAL sDAL;
 	private CourseDAL cDAL;
 	private StudiesDAL stDAL;
@@ -36,7 +38,7 @@ public class Controller {
 		return this.sDAL.getStudent(ssn);
 	}
 
-	public boolean removeStudent(String ssn, String name, String address, String email) throws SQLException {
+	public boolean removeStudent(String ssn) throws SQLException {
 		return this.sDAL.removeStudent(ssn);
 	}
 

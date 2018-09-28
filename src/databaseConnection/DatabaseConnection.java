@@ -1,16 +1,13 @@
 package databaseConnection;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseConnection {
 
 	private static final DatabaseConnection INSTANCE = new DatabaseConnection();
 
-	String url = "jdbc:sqlserver://localhost:1433;database=Assignment";
+	String url = "jdbc:sqlserver://localhost:1433;database=StudentDatabase";
 	String user = "sa";
 	String pass = "INFdev1";
 
@@ -31,9 +28,9 @@ public class DatabaseConnection {
 		return INSTANCE.createConnection();
 	}
 
-	public static void closeResources(Connection connection, Statement statement) throws SQLException {
-		connection.close();
-		statement.close();
+	public static void closeResources(Connection con, Statement state) throws SQLException {
+		con.close();
+		state.close();
 	}
 
 }

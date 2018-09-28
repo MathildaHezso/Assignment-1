@@ -4,7 +4,7 @@ import databaseConnection.DatabaseConnection;
 import model.Student;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -40,11 +40,11 @@ public class StudentDAL {
 
 	}
 
-	public boolean insertStudent(Student s) throws SQLException {
-		String ssn = s.getSsn();
-		String name = s.getName();
-		String address = s.getAddress();
-		String email = s.getEmail();
+	public boolean insertStudent(Student student) throws SQLException {
+		String ssn = student.getSsn();
+		String name = student.getName();
+		String address = student.getAddress();
+		String email = student.getEmail();
 
 		Connection con = null;
 		PreparedStatement state = null;
