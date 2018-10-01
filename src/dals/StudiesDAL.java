@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import databaseConnection.DatabaseConnection;
+import model.HasStudied;
+import model.Student;
 import model.Studies;
 
 public class StudiesDAL {
@@ -86,7 +89,7 @@ public class StudiesDAL {
 		PreparedStatement state = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			state = con.prepareStatement("INSERT INTO Studies VALUES (?, ?");
+			state = con.prepareStatement("INSERT INTO Studies VALUES (?, ?)");
 			state.setString(1, studentSsn);
 			state.setString(2, courseCode);
 
@@ -118,5 +121,32 @@ public class StudiesDAL {
 			DatabaseConnection.closeResources(con, state);
 		}
 	}
+	public List<Studies> getAllStudies() throws SQLException {
+		PreparedStatement state = null;
+		Connection con = null;
 
+		try {
+
+			con = DatabaseConnection.getConnection();
+			state = con.prepareStatement("SELECT * FROM Studies");
+
+			ResultSet rs = state.executeQuery();
+
+			List<Studies> allStudies = new ArrayList<>();
+			while (rs.next()) {
+				String studentSsn = rs.getString("studentSsn");
+				String courseCode = rs.getString("courseCode");
+				
+
+				Studies studies = new Studies(studentSsn, courseCode);
+				allStudies.add(studies);
+			}
+			return allStudies;
+		} finally {
+			DatabaseConnection.closeResources(con, state);
+		}
+
+	}
 }
+
+

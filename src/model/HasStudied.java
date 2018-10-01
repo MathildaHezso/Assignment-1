@@ -3,12 +3,12 @@ package model;
 public class HasStudied {
 
 	private String studentSsn;
-	private String courseCode;
-	private int grade;
+	private String courseCode; 
+	private String grade;
 	
 	public HasStudied() {
 	}
-	public HasStudied (String studentSsn, String courseCode, int grade) {
+	public HasStudied (String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
 		this.courseCode = courseCode;
 		this.grade = grade;
@@ -30,11 +30,11 @@ public class HasStudied {
 		this.courseCode = courseCode;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 

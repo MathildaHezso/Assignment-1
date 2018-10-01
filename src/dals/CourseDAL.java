@@ -98,7 +98,7 @@ public class CourseDAL {
         }
     }
     
-    public boolean removeCourse(String courseCode, String courseName) throws SQLException {
+    public boolean removeCourse(String courseCode) throws SQLException {
         Connection con = null;
         PreparedStatement state = null;
         try {
