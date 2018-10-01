@@ -43,13 +43,15 @@ public class CourseDAL {
             state.setString(1, courseCode);
             
             ResultSet rs = state.executeQuery();
+            
+            Course course = null;
             if (rs.next()) {
                 String courseName = rs.getString("courseName");
                 int credit = rs.getInt("credit");
                 
-                return new Course(courseCode, courseName, credit);
+                course= new Course(courseCode, courseName, credit);
             }
-            return null;
+            return course;
         } finally {
             DatabaseConnection.closeResources(con, state);
         }
@@ -75,9 +77,9 @@ public class CourseDAL {
     }
     
     public boolean insertCourse(Course c) throws SQLException {
-        String courseCode = c.getCourseCode();
-        String courseName = c.getCourseName();
-        int credit = c.getCredit();
+		String courseCode = c.getCourseCode();
+		String courseName = c.getCourseName();
+		int credit = c.getCredit();
         
         Connection con = null;
         PreparedStatement state = null;
@@ -98,7 +100,7 @@ public class CourseDAL {
         }
     }
     
-    public boolean removeCourse(String courseCode, String courseName) throws SQLException {
+    public boolean removeCourse(String courseCode) throws SQLException {
         Connection con = null;
         PreparedStatement state = null;
         try {

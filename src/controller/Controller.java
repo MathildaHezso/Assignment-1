@@ -36,7 +36,7 @@ public class Controller {
 		return this.sDAL.getStudent(ssn);
 	}
 
-	public boolean removeStudent(String ssn, String name, String address, String email) throws SQLException {
+	public boolean removeStudent(String ssn) throws SQLException {
 		return this.sDAL.removeStudent(ssn);
 	}
 
@@ -57,12 +57,13 @@ public class Controller {
 		return this.cDAL.getCoursesCourseCode();
 	}
 
-	public boolean insertCourse(Course c) throws SQLException {
+	public boolean insertCourse(String courseCode, String courseName, int credit) throws SQLException {
+		Course c = new Course(courseCode, courseName, credit);
 		return this.cDAL.insertCourse(c);
 	}
 
-	public boolean removeCourse(String courseCode, String courseName) throws SQLException {
-		return this.cDAL.removeCourse(courseCode, courseName);
+	public boolean removeCourse(String courseCode) throws SQLException {
+		return this.cDAL.removeCourse(courseCode);
 	}
 
 	public ArrayList<Studies> getStudentStudiesByCourseCode(String courseCode) throws SQLException {
