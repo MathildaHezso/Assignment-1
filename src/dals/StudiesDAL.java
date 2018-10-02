@@ -14,73 +14,6 @@ import model.Studies;
 
 public class StudiesDAL {
 
-	public ArrayList<Studies> getStudentStudiesByCourseCode(String courseCode) throws SQLException {
-		Connection con = null;
-		PreparedStatement state = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			state = con.prepareStatement("SELECT * FROM Studies WHERE courseCode = ?");
-			state.setString(1, courseCode);
-
-			ResultSet rs = state.executeQuery();
-
-			ArrayList<Studies> studies = new ArrayList<>();
-			while (rs.next()) {
-				String studentSsn = rs.getString("StudentSsn");
-
-				Studies s = new Studies(studentSsn, courseCode);
-				studies.add(s);
-			}
-			return studies;
-		} finally {
-			DatabaseConnection.closeResources(con, state);
-		}
-	}
-
-	public ArrayList<Studies> getStudentStudiesBySsn(String studentSsn) throws SQLException {
-		Connection con = null;
-		PreparedStatement state = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			state = con.prepareStatement("SELECT * FROM Studies WHERE studentSsn = ?");
-			state.setString(1, studentSsn);
-
-			ResultSet rs = state.executeQuery();
-
-			ArrayList<Studies> studies = new ArrayList<>();
-			while (rs.next()) {
-				String courseCode = rs.getString("CourseCode");
-
-				Studies s = new Studies(studentSsn, courseCode);
-				studies.add(s);
-			}
-			return studies;
-		} finally {
-			DatabaseConnection.closeResources(con, state);
-		}
-	}
-
-	public ArrayList<String> getStudentSsnByCourseCodeStudies(String courseCode) throws SQLException {
-		Connection con = null;
-		PreparedStatement state = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			state = con.prepareStatement("SELECT studentSsn FROM Studies WHERE courseCode = ?");
-			state.setString(1, courseCode);
-
-			ResultSet rs = state.executeQuery();
-
-			ArrayList<String> studentSsns = new ArrayList<>();
-			while (rs.next()) {
-				String studentSsn = rs.getString("StudentSsn");
-				studentSsns.add(studentSsn);
-			}
-			return studentSsns;
-		} finally {
-			DatabaseConnection.closeResources(con, state);
-		}
-	}
-
 	public boolean insertStudies(Studies studies) throws SQLException {
 		String studentSsn = studies.getStudentSsn();
 		String courseCode = studies.getCourseCode();
@@ -121,6 +54,7 @@ public class StudiesDAL {
 			DatabaseConnection.closeResources(con, state);
 		}
 	}
+
 	public List<Studies> getAllStudies() throws SQLException {
 		PreparedStatement state = null;
 		Connection con = null;
@@ -136,7 +70,6 @@ public class StudiesDAL {
 			while (rs.next()) {
 				String studentSsn = rs.getString("studentSsn");
 				String courseCode = rs.getString("courseCode");
-				
 
 				Studies studies = new Studies(studentSsn, courseCode);
 				allStudies.add(studies);
@@ -147,6 +80,26 @@ public class StudiesDAL {
 		}
 
 	}
+
+	public Studies getAllStudies(String studentSsn, String courseCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement state = null;
+		try {
+			con = DatabaseConnection.getConnection();
+			state = con.prepareStatement("SELECT * FROM Studies WHERE studentSsn = ? AND courseCode = ?");
+
+			state.setString(1, studentSsn);
+			state.setString(2, courseCode);
+
+			ResultSet rs = state.executeQuery();
+			if (rs.next()) {
+
+				return new Studies(studentSsn, courseCode);
+			}
+			return null;
+
+		} finally {
+			DatabaseConnection.closeResources(con, state);
+		}
+	}
 }
-
-

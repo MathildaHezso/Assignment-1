@@ -14,10 +14,8 @@ import model.Course;
 import model.Studies;
 import model.HasStudied;
 
-
-
 public class Controller {
-	
+
 	private StudentDAL sDAL;
 	private CourseDAL cDAL;
 	private StudiesDAL stDAL;
@@ -55,34 +53,18 @@ public class Controller {
 		return this.cDAL.getCourse(courseCode);
 	}
 
-	public ArrayList<String> getCoursesCourseCode() throws SQLException {
-		return this.cDAL.getCoursesCourseCode();
-	}
-
 	public boolean insertCourse(String courseCode, String courseName, int credit) throws SQLException {
-		Course c = new Course(courseCode, courseName, credit); 
+		Course c = new Course(courseCode, courseName, credit);
 		return this.cDAL.insertCourse(c);
-		
+
 	}
 
 	public boolean removeCourse(String courseCode) throws SQLException {
 		return this.cDAL.removeCourse(courseCode);
 	}
 
-	public ArrayList<Studies> getStudentStudiesByCourseCode(String courseCode) throws SQLException {
-		return this.stDAL.getStudentStudiesByCourseCode(courseCode);
-	}
-
-	public ArrayList<Studies> getStudentStudiesBySsn(String studentSsn) throws SQLException {
-		return this.stDAL.getStudentStudiesBySsn(studentSsn);
-	}
-
-	public ArrayList<String> getStudentSsnByCourseCodeStudies(String courseCode) throws SQLException {
-		return this.stDAL.getStudentSsnByCourseCodeStudies(courseCode);
-	}
-
 	public boolean insertStudies(String studentSsn, String courseCode) throws SQLException {
-		Studies studies = new Studies(studentSsn, courseCode); 
+		Studies studies = new Studies(studentSsn, courseCode);
 		return this.stDAL.insertStudies(studies);
 	}
 
@@ -90,24 +72,34 @@ public class Controller {
 		return this.stDAL.removeStudies(studentSsn, courseCode);
 	}
 
-	public boolean insertHasStudied(String studentSsn, String courseCode, String grade) throws SQLException {  
-		HasStudied h = new HasStudied(studentSsn, courseCode, grade); 
+	public boolean insertHasStudied(String studentSsn, String courseCode, String grade) throws SQLException {
+		HasStudied h = new HasStudied(studentSsn, courseCode, grade);
 		return this.hsDAL.insertHasStudied(h);
 	}
 
-	public HasStudied getHasStudied(String studentSsn, String courseCode, String grade) throws SQLException {
-		return this.hsDAL.getHasStudied(studentSsn, courseCode, grade);
+	public HasStudied getHasStudied(String studentSsn, String courseCode) throws SQLException {
+		return this.hsDAL.getHasStudied(studentSsn, courseCode);
 
 	}
 
-	public ArrayList<HasStudied> getAllHasStudied() throws SQLException {
-		return this.hsDAL.getAllHasStudied();
+	public ArrayList<HasStudied> getAllHasStudied(String courseCode) throws SQLException {
+		return this.hsDAL.getAllHasStudied(courseCode);
 	}
 
 	public boolean removeHasStudied(String studentSsn, String courseCode) throws SQLException {
 		return this.hsDAL.removeHasStudied(studentSsn, courseCode);
 	}
+
 	public List<Studies> getAllStudies() throws SQLException {
-		return this.stDAL.getAllStudies(); 
+		return this.stDAL.getAllStudies();
 	}
+
+	public List<HasStudied> getAllStudied(String studentSsn, String courseCode) throws SQLException {
+		return this.hsDAL.getAllStudied(studentSsn, courseCode);
+	}
+
+	public Studies getAllStudies(String studentSsn, String courseCode) throws SQLException {
+		return this.stDAL.getAllStudies(studentSsn, courseCode);
+	}
+
 }
