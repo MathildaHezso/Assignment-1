@@ -54,25 +54,7 @@ public class CourseDAL {
             DatabaseConnection.closeResources(con, state);
         }
     }
-    public ArrayList<String> getCoursesCourseCode() throws SQLException {
-        Connection con = null;
-        PreparedStatement state = null;
-        try {
-            con = DatabaseConnection.getConnection();
-            state = con.prepareStatement("SELECT courseCode FROM Course");
-            
-            ResultSet rs = state.executeQuery();
-            
-            ArrayList<String> courseCodes = new ArrayList<>();
-            while (rs.next()) {
-                String courseCode = rs.getString("courseCode");
-                courseCodes.add(courseCode);
-            }
-            return courseCodes;
-        } finally {
-            DatabaseConnection.closeResources(con, state);
-        }
-    }
+   
     
     public boolean insertCourse(Course c) throws SQLException {
         String courseCode = c.getCourseCode();

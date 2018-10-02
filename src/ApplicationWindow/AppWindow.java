@@ -54,15 +54,12 @@ public class AppWindow {
 	private JTextField textField_adminCourseCode;
 	private JTextField textField_adminCourseName;
 	private JTextField textField_adminCourseCredits;
-	private JTextField textField_searchStudentSsn;
-	private JTextField textField_searchCourseCode;
-	private JTextField textField_searchResultCode;
-	private JTextField textField_adminStudentCourseSsn;
-	private JTextField textField_adminStudentCourseCode;
 	private JTextField textField_adminHasStudiedSsn;
 	private JTextField textField_adminHasStudiedCode;
 	private JTable table;
 	private TableRowSorter<DefaultTableModel> sorter;
+	private JTextField textField_adminStudentCourseSsn;
+	private JTextField textField_adminStudentCourseCode;
 
 	/**
 	 * Launch the application.
@@ -118,12 +115,6 @@ public class AppWindow {
 		JScrollPane studentListPane = new JScrollPane(studentList);
 		panel_overview.add(studentListPane);
 		studentListPane.setBounds(37, 103, 486, 123);
-
-		/*
-		 * final JComboBox<String> pickStudiesOrHasStudied = new JComboBox<>(new String
-		 * [] {"Studies", "Has Studied"}); pickStudiesOrHasStudied.setBounds(408, 62,
-		 * 113, 23); panel_overview.add(pickStudiesOrHasStudied);
-		 */
 
 		JButton btnShowStudents = new JButton("Show All Students");
 		btnShowStudents.addActionListener(new ActionListener() {
@@ -191,10 +182,6 @@ public class AppWindow {
 		tabbedPane_Assignment1.addTab("Search", null, panel_2, null);
 		panel_2.setLayout(null);
 
-		
-
-		
-
 		JLabel lblAddFind = new JLabel("Add / Find / Remove Student");
 		lblAddFind.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAddFind.setBounds(61, 30, 195, 14);
@@ -244,19 +231,19 @@ public class AppWindow {
 		panel_1.add(lblCredits);
 
 		JLabel lblGradeOnCourse = new JLabel("Grade on course:");
-		lblGradeOnCourse.setBounds(319, 399, 120, 14);
+		lblGradeOnCourse.setBounds(297, 399, 120, 14);
 		panel_1.add(lblGradeOnCourse);
 
 		JLabel lblStudentSsn = new JLabel("Student SSN:");
-		lblStudentSsn.setBounds(319, 354, 87, 14);
+		lblStudentSsn.setBounds(295, 351, 87, 14);
 		panel_1.add(lblStudentSsn);
 
 		JLabel lblCourseCode_1 = new JLabel("Course Code:");
-		lblCourseCode_1.setBounds(319, 379, 87, 14);
+		lblCourseCode_1.setBounds(297, 376, 87, 14);
 		panel_1.add(lblCourseCode_1);
 
 		JLabel lblStudentSsn_AddRemove = new JLabel("* Student SSN:");
-		lblStudentSsn_AddRemove.setBounds(10, 354, 81, 14);
+		lblStudentSsn_AddRemove.setBounds(10, 351, 81, 14);
 		panel_1.add(lblStudentSsn_AddRemove);
 
 		JLabel lblCourseCode_AddRemove = new JLabel("* Course Code: ");
@@ -297,6 +284,18 @@ public class AppWindow {
 		lblCompletedCourse.setBounds(319, 457, 233, 14);
 		panel_1.add(lblCompletedCourse);
 
+		JLabel lblStudent = new JLabel("");
+		lblStudent.setBounds(26, 205, 246, 14);
+		panel_1.add(lblStudent);
+		
+		JTextPane textPane_Student = new JTextPane();
+		textPane_Student.setBounds(26, 230, 218, 62);
+		panel_1.add(textPane_Student);
+
+		JTextPane textPane_Course = new JTextPane();
+		textPane_Course.setBounds(319, 230, 213, 62);
+		panel_1.add(textPane_Course);
+
 		textField_adminStudentSsn = new JTextField();
 		textField_adminStudentSsn.setBounds(104, 55, 140, 20);
 		panel_1.add(textField_adminStudentSsn);
@@ -332,40 +331,25 @@ public class AppWindow {
 		panel_1.add(textField_adminCourseCredits);
 		textField_adminCourseCredits.setColumns(10);
 
-		textField_adminStudentCourseSsn = new JTextField();
-		textField_adminStudentCourseSsn.setBounds(105, 351, 139, 20);
-		panel_1.add(textField_adminStudentCourseSsn);
-		textField_adminStudentCourseSsn.setColumns(10);
-
-		textField_adminStudentCourseCode = new JTextField();
-		textField_adminStudentCourseCode.setBounds(105, 373, 139, 20);
-		panel_1.add(textField_adminStudentCourseCode);
-		textField_adminStudentCourseCode.setColumns(10);
-
 		textField_adminHasStudiedSsn = new JTextField();
-		textField_adminHasStudiedSsn.setBounds(419, 351, 113, 20);
+		textField_adminHasStudiedSsn.setBounds(394, 351, 138, 20);
 		panel_1.add(textField_adminHasStudiedSsn);
 		textField_adminHasStudiedSsn.setColumns(10);
 
 		textField_adminHasStudiedCode = new JTextField();
-		textField_adminHasStudiedCode.setBounds(419, 373, 113, 20);
+		textField_adminHasStudiedCode.setBounds(394, 373, 138, 20);
 		panel_1.add(textField_adminHasStudiedCode);
 		textField_adminHasStudiedCode.setColumns(10);
 
-		textField_searchStudentSsn = new JTextField();
-		textField_searchStudentSsn.setBounds(209, 47, 140, 20);
-		panel_2.add(textField_searchStudentSsn);
-		textField_searchStudentSsn.setColumns(10);
+		textField_adminStudentCourseSsn = new JTextField();
+		textField_adminStudentCourseSsn.setBounds(104, 348, 140, 20);
+		panel_1.add(textField_adminStudentCourseSsn);
+		textField_adminStudentCourseSsn.setColumns(10);
 
-		textField_searchCourseCode = new JTextField();
-		textField_searchCourseCode.setBounds(209, 75, 140, 20);
-		panel_2.add(textField_searchCourseCode);
-		textField_searchCourseCode.setColumns(10);
-
-		textField_searchResultCode = new JTextField();
-		textField_searchResultCode.setBounds(209, 344, 140, 20);
-		panel_2.add(textField_searchResultCode);
-		textField_searchResultCode.setColumns(10);
+		textField_adminStudentCourseCode = new JTextField();
+		textField_adminStudentCourseCode.setBounds(104, 373, 140, 20);
+		panel_1.add(textField_adminStudentCourseCode);
+		textField_adminStudentCourseCode.setColumns(10);
 
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 214, 542, -14);
@@ -389,9 +373,39 @@ public class AppWindow {
 		comboBoxGrade.addItem("E");
 		comboBoxGrade.addItem("F");
 
-		JLabel lblStudent = new JLabel("");
-		lblStudent.setBounds(26, 205, 246, 14);
-		panel_1.add(lblStudent);
+		JComboBox<String> comboBoxAllCourses = new JComboBox<String>();
+		comboBoxAllCourses.setBounds(209, 344, 140, 20);
+		panel_2.add(comboBoxAllCourses);
+		try {
+			for (Course c : controller.getAllCourses()) {
+				comboBoxAllCourses.addItem(c.getCourseCode());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		JComboBox<String> comboBoxAllStudent = new JComboBox<String>();
+		comboBoxAllStudent.setBounds(209, 47, 140, 20);
+		panel_2.add(comboBoxAllStudent);
+		try {
+			for (Student s : controller.getAllStudents()) {
+				comboBoxAllStudent.addItem(s.getSsn());
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		JComboBox<String> comboBoxAllCoursesStudent = new JComboBox<String>();
+		comboBoxAllCoursesStudent.setBounds(209, 75, 140, 20);
+		panel_2.add(comboBoxAllCoursesStudent);
+		try {
+			for (Course c : controller.getAllCourses()) {
+				comboBoxAllCoursesStudent.addItem(c.getCourseCode());
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		btnAddStudent = new JButton("Add ");
 		btnAddStudent.addActionListener(new ActionListener() {
@@ -406,9 +420,7 @@ public class AppWindow {
 
 					Student s = controller.getStudent(ssn);
 
-					if (textField_adminStudentName.getText().isEmpty() || textField_adminStudentSsn.getText().isEmpty()
-							|| textField_adminStudentAddress.getText().isEmpty()
-							|| textField_adminStudentEmail.getText().isEmpty()) {
+					if (ssn.isEmpty() || name.isEmpty() || address.isEmpty() || email.isEmpty()) {
 						lblStudent.setText("Please fill out all fields.");
 					}
 
@@ -422,11 +434,12 @@ public class AppWindow {
 							textField_adminStudentAddress.setText("");
 							textField_adminStudentEmail.setText("");
 
+						} else if (s != null) {
+							lblStudent.setText("The student already exist.");
+
 						} else {
 							lblStudent.setText("Error.");
 						}
-					} else if (s != null) {
-						lblStudent.setText("The student already exist.");
 
 					}
 
@@ -445,13 +458,7 @@ public class AppWindow {
 		btnAddStudent.setBounds(105, 148, 68, 23);
 		panel_1.add(btnAddStudent);
 
-		JTextPane textPane_Student = new JTextPane();
-		textPane_Student.setBounds(26, 230, 218, 62);
-		panel_1.add(textPane_Student);
-
-		JTextPane textPane_Course = new JTextPane();
-		textPane_Course.setBounds(319, 230, 213, 62);
-		panel_1.add(textPane_Course);
+		
 
 		btnFindStudent = new JButton("Find ");
 		btnFindStudent.addActionListener(new ActionListener() {
@@ -645,23 +652,37 @@ public class AppWindow {
 
 			public void actionPerformed(ActionEvent arg0) {
 
-				String studentSsn = textField_adminHasStudiedSsn.getText();
-				String courseCode = textField_adminHasStudiedCode.getText();
-				String grade = comboBoxGrade.getSelectedItem().toString();
-
 				try {
 
+					String studentSsn = textField_adminHasStudiedSsn.getText();
+					String courseCode = textField_adminHasStudiedCode.getText();
+					String grade = comboBoxGrade.getSelectedItem().toString();
+
+					Student s = controller.getStudent(studentSsn);
+					Course c = controller.getCourse(courseCode);
+					HasStudied hs = controller.getHasStudied(studentSsn, courseCode);
+					Studies st = controller.getAllStudies(studentSsn, courseCode);
+
 					if (studentSsn.isEmpty() || courseCode.isEmpty()) {
-						lblCompletedCourse.setText("Please fill out all fields");
-					} else if (!"".equals(studentSsn) && !"".equals(courseCode)) {
+						lblCompletedCourse.setText("Please fill out all fields.");
+
+					} else if (s == null) {
+						lblCompletedCourse.setText("The student does not exist.");
+					} else if (c == null) {
+						lblCompletedCourse.setText("The course does not exist.");
+					} else if (st == null) {
+						lblCompletedCourse.setText("Student does not study this course.");
+					} else if (hs != null) {
+						lblCompletedCourse.setText("The student has already studied this course.");
+					} else if (hs == null) {
 						boolean correct = controller.insertHasStudied(studentSsn, courseCode, grade);
 						if (correct) {
-							lblCompletedCourse.setText(studentSsn + "registrerad på" + courseCode);
+							lblCompletedCourse.setText(studentSsn + " registered on " + courseCode);
 						}
 					}
 
 					else {
-						lblCompletedCourse.setText("Funkar ej"); 
+						lblCompletedCourse.setText("Error.");
 					}
 
 				} catch (SQLException e1) {
@@ -672,11 +693,11 @@ public class AppWindow {
 
 			}
 		});
-		btnAddStudentCourse.setBounds(419, 421, 113, 23);
+		btnAddStudentCourse.setBounds(392, 421, 140, 23);
 		panel_1.add(btnAddStudentCourse);
 
-		JButton btnShowStudentsOnCourse = new JButton("Add");
-		btnShowStudentsOnCourse.addActionListener(new ActionListener() {
+		JButton btnAddStudentsOnCourse = new JButton("Add");
+		btnAddStudentsOnCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
@@ -684,20 +705,17 @@ public class AppWindow {
 					String studentSsn = textField_adminStudentCourseSsn.getText();
 					String courseCode = textField_adminStudentCourseCode.getText();
 
-					Student s = controller.getStudent(studentSsn);
+					Student st = controller.getStudent(studentSsn);
+					Studies s = controller.getAllStudies(studentSsn, courseCode);
 					Course c = controller.getCourse(courseCode);
 
 					if (studentSsn.isEmpty() || courseCode.isEmpty()) {
 						lblAddRemoveStudentCourse.setText("Please fill out both text fields.");
+					} else if (st == null) {
+						lblAddRemoveStudentCourse.setText("The student does not exist.");
+					} else if (c == null) {
+						lblAddRemoveStudentCourse.setText("The course does not exist.");
 					} else if (s == null) {
-						lblAddRemoveStudentCourse.setText("The student does not exist.");
-
-					}
-
-					else if (c == null) {
-						lblAddRemoveStudentCourse.setText("The student does not exist.");
-					} else if (s != null && c != null) {
-
 						boolean correct = controller.insertStudies(studentSsn, courseCode);
 						if (correct) {
 							lblAddRemoveStudentCourse
@@ -706,6 +724,8 @@ public class AppWindow {
 							textField_adminStudentCourseCode.setText("");
 
 						}
+					} else if (s != null) {
+						lblAddRemoveStudentCourse.setText("Student already studying on this course.");
 					}
 
 				} catch (SQLException e1) {
@@ -716,40 +736,48 @@ public class AppWindow {
 
 			}
 		});
-		btnShowStudentsOnCourse.setBounds(104, 395, 140, 23);
-		panel_1.add(btnShowStudentsOnCourse);
+		btnAddStudentsOnCourse.setBounds(104, 405, 140, 23);
+		panel_1.add(btnAddStudentsOnCourse);
 
 		JButton btnRemoveStudentCourse = new JButton("Remove");
 		btnRemoveStudentCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String removeSsn = textField_adminStudentCourseSsn.getText();
-				String removeCourseCode = textField_adminStudentCourseCode.getText();
+				try {
+					String removeSsn = textField_adminStudentCourseSsn.getText();
+					String removeCourseCode = textField_adminStudentCourseCode.getText();
 
-				if (textField_adminStudentCourseSsn.getText().isEmpty()
-						|| textField_adminStudentCourseCode.getText().isEmpty()) {
-					lblAddRemoveStudentCourse.setText("Please fill in both fields.");
-				} else if (!"".equals(removeSsn) && !"".equals(removeCourseCode)) {
+					Student st = controller.getStudent(removeSsn);
 
-					try {
+					Course c = controller.getCourse(removeCourseCode);
+					Studies s = controller.getAllStudies(removeSsn, removeCourseCode);
+					if (textField_adminStudentCourseSsn.getText().isEmpty()
+							|| textField_adminStudentCourseCode.getText().isEmpty()) {
+						lblAddRemoveStudentCourse.setText("Please fill out both fields.");
+					} else if (st == null) {
+						lblAddRemoveStudentCourse.setText("Student does not exist.");
+					} else if (c == null) {
+						lblAddRemoveStudentCourse.setText("Course does not exist.");
+					} else if (s == null) {
+						lblAddRemoveStudentCourse.setText("The student does not study this course.");
+					} else if (s != null) {
 						boolean correct = controller.removeStudies(removeSsn, removeCourseCode);
 						if (correct) {
 							lblAddRemoveStudentCourse
 									.setText("Student with ssn " + removeSsn + " has been removed from course.");
 							textField_adminStudentCourseSsn.setText("");
 							textField_adminStudentCourseCode.setText("");
-
 						}
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					} catch (Exception e2) {
-						e2.printStackTrace();
 					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (Exception e2) {
+					e2.printStackTrace();
 				}
 			}
 
 		});
-		btnRemoveStudentCourse.setBounds(104, 421, 140, 23);
+		btnRemoveStudentCourse.setBounds(104, 429, 140, 23);
 		panel_1.add(btnRemoveStudentCourse);
 
 		JTable studentCourseList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Course code" }, 0));
@@ -758,7 +786,7 @@ public class AppWindow {
 		panel_1.add(studentCourseListPane);
 		studentCourseListPane.setBounds(26, 482, 506, 56);
 
-		JButton btnShowAllStudentsOnAllCourses = new JButton("Show all students on courses");
+		JButton btnShowAllStudentsOnAllCourses = new JButton("Show all students currently studying");
 		btnShowAllStudentsOnAllCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -779,53 +807,55 @@ public class AppWindow {
 		});
 		btnShowAllStudentsOnAllCourses.setBounds(26, 549, 506, 23);
 		panel_1.add(btnShowAllStudentsOnAllCourses);
-		
-		
+
 		JTable showGradeList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Course code", "Grade" }, 0));
 		showGradeList.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		JScrollPane showGradeListPane = new JScrollPane(showGradeList);
 		panel_2.add(showGradeListPane);
 		showGradeListPane.setBounds(30, 147, 501, 97);
 
-		
 		JButton btnShowGrade = new JButton("Show grade");
 		btnShowGrade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try {
+					String studentSsn = comboBoxAllStudent.getSelectedItem().toString();
+					String courseCode = comboBoxAllCoursesStudent.getSelectedItem().toString();
 
 					DefaultTableModel studentGradeTable = (DefaultTableModel) showGradeList.getModel();
 					studentGradeTable.setRowCount(0);
-					for (HasStudied hs : controller.getAllHasStudied()) {
-						studentGradeTable.addRow(new String[] { hs.getStudentSsn(), hs.getCourseCode(), hs.getGrade() });
+					for (HasStudied hs : controller.getAllStudied(studentSsn, courseCode)) {
+						studentGradeTable
+								.addRow(new String[] { hs.getStudentSsn(), hs.getCourseCode(), hs.getGrade() });
 					}
-
-				} catch (Exception e1) {
+				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 
-		
 			}
 		});
 		btnShowGrade.setBounds(209, 103, 140, 23);
 		panel_2.add(btnShowGrade);
-		
-		JTable showAllCourseList = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name", "Ssn", "Grade" }, 0));
+
+		JTable showAllCourseList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Course code", "Grade" }, 0));
 		showAllCourseList.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		JScrollPane showAllCourseListPane = new JScrollPane(showAllCourseList);
 		panel_2.add(showAllCourseListPane);
 		showAllCourseListPane.setBounds(30, 426, 501, 97);
-		
+
 		JButton btnShowResult = new JButton("Show result");
 		btnShowResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+				String courseCode = comboBoxAllCourses.getSelectedItem().toString();
+
 				try {
 
 					DefaultTableModel courseResultTable = (DefaultTableModel) showAllCourseList.getModel();
 					courseResultTable.setRowCount(0);
-					for (HasStudied hs : controller.getAllHasStudied()) {
-						courseResultTable.addRow(new String[] { hs.getStudentSsn(), hs.getCourseCode(), hs.getGrade() });
+					for (HasStudied hs : controller.getAllHasStudied(courseCode)) {
+						courseResultTable
+								.addRow(new String[] { hs.getStudentSsn(), hs.getCourseCode(), hs.getGrade() });
 					}
 
 				} catch (Exception e1) {
@@ -836,7 +866,6 @@ public class AppWindow {
 		});
 		btnShowResult.setBounds(209, 375, 140, 23);
 		panel_2.add(btnShowResult);
-		
 
 	}
 }
