@@ -4,12 +4,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.awt.Desktop;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
@@ -24,6 +28,8 @@ import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import assignment2.MetaDataDAL;
+import java.awt.Desktop;
+import java.io.IOException;
 
 public class AppWindow {
 
@@ -83,9 +89,11 @@ public class AppWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 588, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		tabbedPane.setBounds(0, 0, 572, 641);
+		frame.getContentPane().add(tabbedPane);
 
 		JTabbedPane tabbedPane_Assignment1 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Assignment 1", null, tabbedPane_Assignment1, null);
@@ -284,9 +292,6 @@ public class AppWindow {
 		});
 		btnEmpPortal.setBounds(371, 364, 139, 23);
 		panel_assignment2.add(btnEmpPortal);
-
-		JTabbedPane tabbedPane_Assignment3 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Assignment 3", null, tabbedPane_Assignment3, null);
 
 		JPanel panel_overview = new JPanel();
 		tabbedPane_Assignment1.addTab("Overview", null, panel_overview, null);
@@ -1108,6 +1113,168 @@ public class AppWindow {
 		});
 		btnShowResult.setBounds(209, 375, 140, 23);
 		panel_2.add(btnShowResult);
+		
+		JPanel panel_assignment3 = new JPanel();
+		tabbedPane.addTab("Assignment 3", null, panel_assignment3, null);
+		panel_assignment3.setLayout(null);
+		
+		JButton btnOpenExcel = new JButton("Report of All Customers");
+		btnOpenExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\AllCustomers.docx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnOpenExcel.setBounds(34, 372, 170, 23);
+		panel_assignment3.add(btnOpenExcel);
+		
+		JButton btnNewButton = new JButton("Report of All Employees");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\AllEmployees.docx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(34, 406, 170, 23);
+		panel_assignment3.add(btnNewButton);
+		
+		JLabel lblExcel = new JLabel("Microsoft Excel");
+		lblExcel.setBounds(24, 23, 96, 14);
+		panel_assignment3.add(lblExcel);
+		
+		JLabel lblAccess = new JLabel("Microsoft Access");
+		lblAccess.setBounds(24, 243, 103, 14);
+		panel_assignment3.add(lblAccess);
+		
+		JLabel lblMicrosoftWord = new JLabel("Microsoft Word");
+		lblMicrosoftWord.setBounds(24, 347, 103, 14);
+		panel_assignment3.add(lblMicrosoftWord);
+		
+		JButton btnNewButton_1 = new JButton("Queries & Reports");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\Assignment3.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setBounds(111, 11, 170, 23);
+		panel_assignment3.add(btnNewButton_1);
+		
+		JButton btnQueriesReports = new JButton("Queries & Reports");
+		btnQueriesReports.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\\\Users\\\\Administrator\\\\Desktop\\\\Assignment3.accdb");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnQueriesReports.setBounds(34, 293, 170, 23);
+		panel_assignment3.add(btnQueriesReports);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setBounds(10, 223, 547, 7);
+		panel_assignment3.add(separator_5);
+		
+		JSeparator separator_6 = new JSeparator();
+		separator_6.setBounds(10, 336, 547, 0);
+		panel_assignment3.add(separator_6);
+		
+		JSeparator separator_7 = new JSeparator();
+		separator_7.setBounds(10, 324, 547, 14);
+		panel_assignment3.add(separator_7);
+		
+		JButton btnHowMuchIs = new JButton("How much is 100 NOK?");
+		btnHowMuchIs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\ExcelQuery1.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnHowMuchIs.setBounds(10, 48, 293, 23);
+		panel_assignment3.add(btnHowMuchIs);
+		
+		JButton btnWhatValueIs = new JButton("What value is traded for the most amount of SEK?");
+		btnWhatValueIs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\ExcelQuery2.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnWhatValueIs.setBounds(10, 73, 293, 23);
+		panel_assignment3.add(btnWhatValueIs);
+		
+		JButton btnAtWhichAddress = new JButton("At which address and in what city is Fotograferna AB located?");
+		btnAtWhichAddress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\ExcelQuery3.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnAtWhichAddress.setBounds(10, 97, 293, 23);
+		panel_assignment3.add(btnAtWhichAddress);
+		
+		JButton btnNamesOfAll = new JButton("Names of all employees who have been ill/sick.");
+		btnNamesOfAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\ExcelQuery4.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNamesOfAll.setBounds(10, 118, 293, 23);
+		panel_assignment3.add(btnNamesOfAll);
+		
+		JButton btnNameAndFamily = new JButton("Name and family relation for all employees\u2019 relatives.");
+		btnNameAndFamily.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file = new File("C:\\Users\\Administrator\\Desktop\\ExcelQuery5.xlsx");
+				try {
+					Desktop.getDesktop().open(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNameAndFamily.setBounds(10, 141, 293, 23);
+		panel_assignment3.add(btnNameAndFamily);
+		
+		JButton btnWhatCustomersAre = new JButton("What customers are handled by (emp) Andreas Berglund?");
+		btnWhatCustomersAre.setBounds(10, 162, 293, 23);
+		panel_assignment3.add(btnWhatCustomersAre);
+		
+		JButton btnWhatBankAccounts = new JButton("What bank accounts belong to the customer with customer number 10 000?");
+		btnWhatBankAccounts.setBounds(10, 189, 328, 23);
+		panel_assignment3.add(btnWhatBankAccounts);
 
 	}
 }
