@@ -14,8 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 
@@ -29,8 +34,8 @@ import javax.swing.JList;
 import java.awt.Component;
 
 import controller.Controller;
-import assignment_2.Controller2;
-import assignment_2.MetaData;
+import databaseConnection.DatabaseConnection;
+import assignment_2.DatabaseConnection2;
 import model.Course;
 import model.Student;
 import assignment_2.MetaDataDAL;
@@ -54,7 +59,7 @@ public class AppWindow {
     private JButton btnAddStudent;
     private JButton btnFindStudent;
     private Controller controller;
-    private Controller2 controller2;
+    private MetaDataDAL metaDAL;
     private JTextField textField_adminStudentSsn;
     private JTextField textField_adminStudentName;
     private JTextField textField_adminStudentAddress;
@@ -75,6 +80,9 @@ public class AppWindow {
     private JTable table;
     private JComboBox comboBox;
     private JTable table_assignment2;
+    private JTable table_assignment_2;
+    private JTable table_1;
+    private JTable table_EmpTables;
 
     /**
      * Launch the application.
@@ -97,7 +105,7 @@ public class AppWindow {
      */
     public AppWindow() {
    	 controller = new Controller();
-   	 controller2 = new Controller2();
+   	 metaDAL = new MetaDataDAL();
 
    	 initialize();
     }
@@ -107,12 +115,12 @@ public class AppWindow {
      */
     private void initialize() {
    	 frame = new JFrame();
-   	 frame.setBounds(100, 100, 588, 591);
+   	 frame.setBounds(100, 100, 588, 679);
    	 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    	 frame.getContentPane().setLayout(null);
 
    	 JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-   	 tabbedPane.setBounds(0, 0, 572, 552);
+   	 tabbedPane.setBounds(0, 0, 572, 640);
    	 frame.getContentPane().add(tabbedPane);
 
    	 JTabbedPane tabbedPane_Assignment1 = new JTabbedPane(JTabbedPane.TOP);
@@ -122,37 +130,196 @@ public class AppWindow {
    	 tabbedPane.addTab("Assignment 2", null, panel_assignment2, null);
    	 panel_assignment2.setLayout(null);
    	 
-   	 JScrollPane scrollPaneAssignment2 = new JScrollPane();
-   	 scrollPaneAssignment2.setBounds(101, 119, 402, 221);
-   	 panel_assignment2.add(scrollPaneAssignment2);
-   	 
-   	 table_assignment2 = new JTable();
-   	 scrollPaneAssignment2.setViewportView(table_assignment2);
+   	 JTable table_assignment_2_1 = new JTable(new DefaultTableModel(new String[] {}, 0));
+   	 table_assignment_2_1.setFont(new Font("Open Sans", Font.PLAIN, 11));
+   	 JScrollPane scrollPane2 = new JScrollPane(table_assignment_2_1);
+   	 panel_assignment2.add(scrollPane2);
+   	 scrollPane2.setBounds(56, 106, 454, 150);
    	 
    	 JButton btnAllKeys = new JButton("All keys");
    	 btnAllKeys.addActionListener(new ActionListener() {
    	 	public void actionPerformed(ActionEvent e) {
-   	 		
+   	 	
+   	 		try {
+				table_assignment_2_1.setModel(metaDAL.getAllKeys());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
    	 	}
    	 });
-   	 btnAllKeys.setBounds(101, 26, 119, 23);
+   	 btnAllKeys.setBounds(56, 26, 106, 23);
    	 panel_assignment2.add(btnAllKeys);
    	 
    	 JButton btnShowAllIndex = new JButton("All index");
-   	 btnShowAllIndex.setBounds(250, 26, 119, 23);
+   	 btnShowAllIndex.addActionListener(new ActionListener() {
+    	 	public void actionPerformed(ActionEvent e) {
+       	 		try {
+    				table_assignment_2_1.setModel(metaDAL.getAllIndexes());
+    			} catch (SQLException e1) {
+    				// TODO Auto-generated catch block
+    				e1.printStackTrace();
+    			}
+    	 	}
+    	 });
+   	 btnShowAllIndex.setBounds(174, 26, 106, 23);
    	 panel_assignment2.add(btnShowAllIndex);
    	 
-   	 JButton btnNewButton = new JButton("All contraints");
-   	 btnNewButton.setBounds(101, 60, 119, 23);
-   	 panel_assignment2.add(btnNewButton);
+   	 JButton btnAllConstraints = new JButton("All contraints");
+   	 btnAllConstraints.addActionListener(new ActionListener() {
+	 	public void actionPerformed(ActionEvent e) {
+	        
+   	 		try {
+				table_assignment_2_1.setModel(metaDAL.getAllConstraints());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	}
+
+	 });
+   	 btnAllConstraints.setBounds(409, 26, 106, 23);
+   	 panel_assignment2.add(btnAllConstraints);
    	 
-   	 JButton btnNewButton_1 = new JButton("All tables");
-   	 btnNewButton_1.setBounds(250, 60, 119, 23);
-   	 panel_assignment2.add(btnNewButton_1);
+   	 JButton btnAllTables = new JButton("All tables");
+   	 btnAllTables.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent arg0) {
+   	 		try {
+				table_assignment_2_1.setModel(metaDAL.getAllTables());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+   	 	}
+   	 });
+   	 btnAllTables.setBounds(293, 26, 106, 23);
+   	 panel_assignment2.add(btnAllTables);
    	 
-   	 JButton btnNewButton_2 = new JButton("Employee columns");
-   	 btnNewButton_2.setBounds(397, 26, 119, 23);
-   	 panel_assignment2.add(btnNewButton_2);
+   	 JButton btnEmpColumn = new JButton("Employee columns");
+   	 btnEmpColumn.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 		try {
+				table_assignment_2_1.setModel(metaDAL.getAllEmpColumn());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+   	 	}
+   	 });
+   	 btnEmpColumn.setBounds(86, 60, 203, 23);
+   	 panel_assignment2.add(btnEmpColumn);
+   	 
+   	 JButton btnTableWithMost = new JButton("Table with most rows");
+   	 btnTableWithMost.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	   	 	try {
+   	   	 	table_assignment_2_1.setModel(metaDAL.getMostRows());
+   			} catch (SQLException e1) {
+   				// TODO Auto-generated catch block
+   				e1.printStackTrace();
+   			}
+   	 	}
+   	 });
+   	 btnTableWithMost.setBounds(338, 60, 158, 23);
+   	 panel_assignment2.add(btnTableWithMost);
+   	 
+   	 JSeparator separator_4 = new JSeparator();
+   	 separator_4.setBounds(20, 291, 520, 2);
+   	 panel_assignment2.add(separator_4);
+   	 
+   	 JScrollPane scrollPane3 = new JScrollPane();
+   	 scrollPane3.setBounds(56, 411, 454, 150);
+   	 panel_assignment2.add(scrollPane3);
+   	 
+   	 table_EmpTables = new JTable();
+   	 scrollPane3.setViewportView(table_EmpTables);
+   	 scrollPane3.setBounds(56, 411, 454, 150);
+   	 panel_assignment2.add(scrollPane3);
+   	 
+   	 JButton btnEmpTable = new JButton("Employee");
+   	 btnEmpTable.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent arg0) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployee());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpTable.setBounds(56, 318, 139, 23);
+   	 panel_assignment2.add(btnEmpTable);
+   	 
+   	 JButton btnEmpAbsence = new JButton("Employee Absence");
+   	 btnEmpAbsence.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployeeAbsence());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpAbsence.setBounds(56, 364, 139, 23);
+   	 panel_assignment2.add(btnEmpAbsence);
+   	 
+   	 JButton btnEmpRelative = new JButton("Employee Relative");
+   	 btnEmpRelative.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployeeRelative());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpRelative.setBounds(218, 318, 139, 23);
+   	 panel_assignment2.add(btnEmpRelative);
+   	 
+   	 JButton btnEmpQuali = new JButton("Employee qualification");
+   	 btnEmpQuali.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployeeQuali());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpQuali.setBounds(218, 364, 139, 23);
+   	 panel_assignment2.add(btnEmpQuali);
+   	 
+   	 JButton btnEmpStatistic = new JButton("Employee statistics");
+   	 btnEmpStatistic.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployeeStatistic());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpStatistic.setBounds(371, 318, 139, 23);
+   	 panel_assignment2.add(btnEmpStatistic);
+   	 
+   	 JButton btnEmpPortal = new JButton("Employee Portal");
+   	 btnEmpPortal.addActionListener(new ActionListener() {
+   	 	public void actionPerformed(ActionEvent e) {
+   	 	try {
+			table_EmpTables.setModel(metaDAL.getEmployeePortal());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+   	 	}
+   	 });
+   	 btnEmpPortal.setBounds(371, 364, 139, 23);
+   	 panel_assignment2.add(btnEmpPortal);
 
    	 JTabbedPane tabbedPane_Assignment3 = new JTabbedPane(JTabbedPane.TOP);
    	 tabbedPane.addTab("Assignment 3", null, tabbedPane_Assignment3, null);
