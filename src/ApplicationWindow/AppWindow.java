@@ -1,7 +1,6 @@
 package ApplicationWindow;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
@@ -9,40 +8,30 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
-import javax.swing.table.TableRowSorter;
 import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import java.awt.*;
-
 import javax.swing.JSeparator;
-import javax.swing.JRadioButton;
-
-import javax.swing.JSpinner;
-
 import java.awt.Font;
-import javax.swing.JList;
-import java.awt.Component;
-
 import controller.Controller;
 import model.Course;
 import model.HasStudied;
 import model.Student;
 import model.Studies;
-
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
+import assignment2.MetaDataDAL;
 
 public class AppWindow {
 
 	private JFrame frame;
 
+	private MetaDataDAL metaDAL;
+	private JButton btnShowCourses;
+	private JButton btnShowStudents;
 	private JButton btnRemoveStudent;
 	private JButton btnAddStudent;
 	private JButton btnFindStudent;
@@ -56,8 +45,8 @@ public class AppWindow {
 	private JTextField textField_adminCourseCredits;
 	private JTextField textField_adminHasStudiedSsn;
 	private JTextField textField_adminHasStudiedCode;
-	private JTable table;
-	private TableRowSorter<DefaultTableModel> sorter;
+	private JTable studentList;
+	private JTable courseList;
 	private JTextField textField_adminStudentCourseSsn;
 	private JTextField textField_adminStudentCourseCode;
 
@@ -82,6 +71,7 @@ public class AppWindow {
 	 */
 	public AppWindow() {
 		controller = new Controller();
+		metaDAL = new MetaDataDAL();
 
 		initialize();
 	}
@@ -91,7 +81,7 @@ public class AppWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 588, 678);
+		frame.setBounds(100, 100, 588, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -100,8 +90,200 @@ public class AppWindow {
 		JTabbedPane tabbedPane_Assignment1 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Assignment 1", null, tabbedPane_Assignment1, null);
 
-		JTabbedPane tabbedPane_Assignment2 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Assignment 2", null, tabbedPane_Assignment2, null);
+		JPanel panel_assignment2 = new JPanel();
+		tabbedPane.addTab("Assignment 2", null, panel_assignment2, null);
+		panel_assignment2.setLayout(null);
+
+		JTable table_assignment_2_1 = new JTable(new DefaultTableModel(new String[] {}, 0));
+		table_assignment_2_1.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		JScrollPane scrollPane2 = new JScrollPane(table_assignment_2_1);
+		panel_assignment2.add(scrollPane2);
+		scrollPane2.setBounds(56, 106, 454, 150);
+
+		JButton btnAllKeys = new JButton("All keys");
+		btnAllKeys.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					table_assignment_2_1.setModel(metaDAL.getAllKeys());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnAllKeys.setBounds(56, 26, 106, 23);
+		panel_assignment2.add(btnAllKeys);
+
+		JButton btnShowAllIndex = new JButton("All index");
+		btnShowAllIndex.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_assignment_2_1.setModel(metaDAL.getAllIndexes());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnShowAllIndex.setBounds(174, 26, 106, 23);
+		panel_assignment2.add(btnShowAllIndex);
+
+		JButton btnAllConstraints = new JButton("All contraints");
+		btnAllConstraints.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					table_assignment_2_1.setModel(metaDAL.getAllConstraints());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		});
+		btnAllConstraints.setBounds(409, 26, 106, 23);
+		panel_assignment2.add(btnAllConstraints);
+
+		JButton btnAllTables = new JButton("All tables");
+		btnAllTables.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					table_assignment_2_1.setModel(metaDAL.getAllTables());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAllTables.setBounds(293, 26, 106, 23);
+		panel_assignment2.add(btnAllTables);
+
+		JButton btnEmpColumn = new JButton("Employee columns");
+		btnEmpColumn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_assignment_2_1.setModel(metaDAL.getAllEmpColumn());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpColumn.setBounds(86, 60, 203, 23);
+		panel_assignment2.add(btnEmpColumn);
+
+		JButton btnTableWithMost = new JButton("Table with most rows");
+		btnTableWithMost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_assignment_2_1.setModel(metaDAL.getMostRows());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnTableWithMost.setBounds(338, 60, 158, 23);
+		panel_assignment2.add(btnTableWithMost);
+
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(20, 291, 520, 2);
+		panel_assignment2.add(separator_4);
+
+		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setBounds(56, 411, 454, 150);
+		panel_assignment2.add(scrollPane3);
+
+		JTable table_EmpTables = new JTable();
+		scrollPane3.setViewportView(table_EmpTables);
+		scrollPane3.setBounds(56, 411, 454, 150);
+		panel_assignment2.add(scrollPane3);
+
+		JButton btnEmpTable = new JButton("Employee");
+		btnEmpTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployee());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpTable.setBounds(56, 318, 139, 23);
+		panel_assignment2.add(btnEmpTable);
+
+		JButton btnEmpAbsence = new JButton("Employee Absence");
+		btnEmpAbsence.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployeeAbsence());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpAbsence.setBounds(56, 364, 139, 23);
+		panel_assignment2.add(btnEmpAbsence);
+
+		JButton btnEmpRelative = new JButton("Employee Relative");
+		btnEmpRelative.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployeeRelative());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpRelative.setBounds(218, 318, 139, 23);
+		panel_assignment2.add(btnEmpRelative);
+
+		JButton btnEmpQuali = new JButton("Employee qualification");
+		btnEmpQuali.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployeeQuali());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpQuali.setBounds(218, 364, 139, 23);
+		panel_assignment2.add(btnEmpQuali);
+
+		JButton btnEmpStatistic = new JButton("Employee statistics");
+		btnEmpStatistic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployeeStatistic());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpStatistic.setBounds(371, 318, 139, 23);
+		panel_assignment2.add(btnEmpStatistic);
+
+		JButton btnEmpPortal = new JButton("Employee Portal");
+		btnEmpPortal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table_EmpTables.setModel(metaDAL.getEmployeePortal());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnEmpPortal.setBounds(371, 364, 139, 23);
+		panel_assignment2.add(btnEmpPortal);
 
 		JTabbedPane tabbedPane_Assignment3 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Assignment 3", null, tabbedPane_Assignment3, null);
@@ -110,13 +292,15 @@ public class AppWindow {
 		tabbedPane_Assignment1.addTab("Overview", null, panel_overview, null);
 		panel_overview.setLayout(null);
 
-		JTable studentList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Name", "Address", "Email" }, 0));
+		studentList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Name", "Address", "Email" }, 0));
 		studentList.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		JScrollPane studentListPane = new JScrollPane(studentList);
 		panel_overview.add(studentListPane);
 		studentListPane.setBounds(37, 103, 486, 123);
 
-		JButton btnShowStudents = new JButton("Show All Students");
+		// Shows all students in a JTable
+
+		btnShowStudents = new JButton("Show All Students");
 		btnShowStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -138,13 +322,14 @@ public class AppWindow {
 		btnShowStudents.setBounds(37, 61, 486, 23);
 		panel_overview.add(btnShowStudents);
 
-		JTable courseList = new JTable(new DefaultTableModel(new String[] { "Course code", "Course code" }, 0));
+		courseList = new JTable(new DefaultTableModel(new String[] { "Course code", "Course code" }, 0));
 		courseList.setFont(new Font("Open sans", Font.PLAIN, 11));
 		JScrollPane courseListPane = new JScrollPane(courseList);
 		panel_overview.add(courseListPane);
 		courseListPane.setBounds(37, 334, 488, 123);
 
-		JButton btnShowCourses = new JButton("Show All Courses");
+		// Shows all courses in the JTable
+		btnShowCourses = new JButton("Show All Courses");
 		btnShowCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -165,14 +350,11 @@ public class AppWindow {
 		btnShowCourses.setBounds(37, 292, 486, 23);
 		panel_overview.add(btnShowCourses);
 
+		// Panel
 		JLabel lblOverview = new JLabel("OVERVIEW");
 		lblOverview.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblOverview.setBounds(241, 21, 80, 14);
 		panel_overview.add(lblOverview);
-
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(0, 259, 562, 2);
-		panel_overview.add(separator_3);
 
 		JPanel panel_1 = new JPanel();
 		tabbedPane_Assignment1.addTab("Administration", null, panel_1, null);
@@ -182,6 +364,7 @@ public class AppWindow {
 		tabbedPane_Assignment1.addTab("Search", null, panel_2, null);
 		panel_2.setLayout(null);
 
+		// Label
 		JLabel lblAddFind = new JLabel("Add / Find / Remove Student");
 		lblAddFind.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAddFind.setBounds(61, 30, 195, 14);
@@ -250,7 +433,7 @@ public class AppWindow {
 		lblCourseCode_AddRemove.setBounds(10, 376, 93, 14);
 		panel_1.add(lblCourseCode_AddRemove);
 
-		JLabel lblResultForCompleted = new JLabel("Student Resuts");
+		JLabel lblResultForCompleted = new JLabel("Student Results");
 		lblResultForCompleted.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblResultForCompleted.setBounds(232, 22, 117, 14);
 		panel_2.add(lblResultForCompleted);
@@ -259,11 +442,11 @@ public class AppWindow {
 		lblCourseCode_3.setBounds(115, 347, 79, 14);
 		panel_2.add(lblCourseCode_3);
 
-		JLabel lblStudentSsn_2 = new JLabel("* Student SSN:");
+		JLabel lblStudentSsn_2 = new JLabel("Student SSN:");
 		lblStudentSsn_2.setBounds(115, 50, 106, 14);
 		panel_2.add(lblStudentSsn_2);
 
-		JLabel lblCourseCode_4 = new JLabel("* Course Code:");
+		JLabel lblCourseCode_4 = new JLabel("Course Code:");
 		lblCourseCode_4.setBounds(115, 78, 105, 14);
 		panel_2.add(lblCourseCode_4);
 
@@ -272,22 +455,27 @@ public class AppWindow {
 		lblCourseResults.setBounds(232, 319, 86, 14);
 		panel_2.add(lblCourseResults);
 
-		JLabel lblAddRemoveStudentCourse = new JLabel("");
-		lblAddRemoveStudentCourse.setBounds(26, 457, 262, 14);
+		JLabel lblAddRemoveStudentCourse = new JLabel("X");
+		lblAddRemoveStudentCourse.setBounds(25, 463, 262, 14);
 		panel_1.add(lblAddRemoveStudentCourse);
 
-		JLabel lblCourse = new JLabel("");
+		JLabel lblCourse = new JLabel("X");
 		lblCourse.setBounds(319, 205, 233, 14);
 		panel_1.add(lblCourse);
 
-		JLabel lblCompletedCourse = new JLabel("");
-		lblCompletedCourse.setBounds(319, 457, 233, 14);
+		JLabel lblCompletedCourse = new JLabel("X");
+		lblCompletedCourse.setBounds(297, 463, 255, 14);
 		panel_1.add(lblCompletedCourse);
 
-		JLabel lblStudent = new JLabel("");
-		lblStudent.setBounds(26, 205, 246, 14);
+		JLabel lblStudent = new JLabel("X");
+		lblStudent.setBounds(27, 205, 246, 14);
 		panel_1.add(lblStudent);
-		
+
+		JLabel lblStudentResults = new JLabel("X");
+		lblStudentResults.setBounds(115, 136, 328, 14);
+		panel_2.add(lblStudentResults);
+
+		// Text Panes
 		JTextPane textPane_Student = new JTextPane();
 		textPane_Student.setBounds(26, 230, 218, 62);
 		panel_1.add(textPane_Student);
@@ -296,6 +484,7 @@ public class AppWindow {
 		textPane_Course.setBounds(319, 230, 213, 62);
 		panel_1.add(textPane_Course);
 
+		// Text Fields
 		textField_adminStudentSsn = new JTextField();
 		textField_adminStudentSsn.setBounds(104, 55, 140, 20);
 		panel_1.add(textField_adminStudentSsn);
@@ -351,6 +540,11 @@ public class AppWindow {
 		panel_1.add(textField_adminStudentCourseCode);
 		textField_adminStudentCourseCode.setColumns(10);
 
+		// Separators
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 305, 578, 2);
+		panel_1.add(separator);
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 214, 542, -14);
 		panel_2.add(separator_1);
@@ -359,10 +553,11 @@ public class AppWindow {
 		separator_2.setBounds(0, 287, 572, 2);
 		panel_2.add(separator_2);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(0, 305, 578, 2);
-		panel_1.add(separator);
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(0, 259, 562, 2);
+		panel_overview.add(separator_3);
 
+		// Combo Boxes
 		JComboBox<String> comboBoxGrade = new JComboBox<String>();
 		comboBoxGrade.setBounds(464, 396, 68, 20);
 		panel_1.add(comboBoxGrade);
@@ -381,7 +576,7 @@ public class AppWindow {
 				comboBoxAllCourses.addItem(c.getCourseCode());
 			}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+
 			e1.printStackTrace();
 		}
 
@@ -407,10 +602,12 @@ public class AppWindow {
 			e1.printStackTrace();
 		}
 
+		// Adds a student to the database
 		btnAddStudent = new JButton("Add ");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				comboBoxAllStudent.removeAllItems();
 				try {
 
 					String ssn = textField_adminStudentSsn.getText();
@@ -434,13 +631,22 @@ public class AppWindow {
 							textField_adminStudentAddress.setText("");
 							textField_adminStudentEmail.setText("");
 
-						} else if (s != null) {
-							lblStudent.setText("The student already exist.");
+							try {
 
-						} else {
-							lblStudent.setText("Error.");
+								for (Student st : controller.getAllStudents()) {
+									comboBoxAllStudent.addItem(st.getSsn());
+
+								}
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
 						}
 
+					} else if (s != null) {
+						lblStudent.setText("The student already exist.");
+
+					} else {
+						lblStudent.setText("Error.");
 					}
 
 				}
@@ -452,14 +658,14 @@ public class AppWindow {
 					e2.printStackTrace();
 
 				}
+
 			}
 		});
 
 		btnAddStudent.setBounds(105, 148, 68, 23);
 		panel_1.add(btnAddStudent);
 
-		
-
+		// Find a student
 		btnFindStudent = new JButton("Find ");
 		btnFindStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -492,11 +698,13 @@ public class AppWindow {
 				} else {
 					lblStudent.setText("You forgot the student ssn.");
 				}
+
 			}
 		});
 		btnFindStudent.setBounds(176, 148, 68, 23);
 		panel_1.add(btnFindStudent);
 
+		// Removes a student from the database
 		btnRemoveStudent = new JButton("Remove Student");
 		btnRemoveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -523,15 +731,19 @@ public class AppWindow {
 						e2.printStackTrace();
 					}
 				}
+
 			}
 		});
 		btnRemoveStudent.setBounds(105, 172, 139, 23);
 		panel_1.add(btnRemoveStudent);
 
+		// Adds a course to the database
 		JButton btnAddCourse = new JButton("Add");
 		btnAddCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				comboBoxAllCoursesStudent.removeAllItems();
+				comboBoxAllCourses.removeAllItems();
 				try {
 
 					String courseCode = textField_adminCourseCode.getText();
@@ -540,8 +752,7 @@ public class AppWindow {
 
 					Course c = controller.getCourse(courseCode);
 
-					if (textField_adminCourseCode.getText().isEmpty() || textField_adminCourseName.getText().isEmpty()
-							|| textField_adminCourseCredits.getText().isEmpty()) {
+					if (courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
 						lblCourse.setText("Please fill out all fields.");
 
 					}
@@ -555,6 +766,22 @@ public class AppWindow {
 							textField_adminCourseName.setText("");
 							textField_adminCourseCredits.setText("");
 
+							try {
+								for (Course course : controller.getAllCourses()) {
+									comboBoxAllCourses.addItem(course.getCourseCode());
+								}
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+
+							try {
+								for (Course course : controller.getAllCourses()) {
+									comboBoxAllCoursesStudent.addItem(course.getCourseCode());
+								}
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+
 						} else {
 							lblCourse.setText("Error.");
 						}
@@ -565,13 +792,14 @@ public class AppWindow {
 
 				}
 
-				catch (SQLException e1) {
-					e1.printStackTrace();
+				catch (NumberFormatException e1) {
+					lblCourse.setText("Credits can only be numbers.");
 
 				} catch (Exception e2) {
 					e2.printStackTrace();
 
 				}
+
 			}
 
 		});
@@ -579,9 +807,11 @@ public class AppWindow {
 		btnAddCourse.setBounds(392, 148, 68, 23);
 		panel_1.add(btnAddCourse);
 
+		// Find a course
 		JButton btnFindCourse = new JButton("Find");
 		btnFindCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				String courseCode = textField_adminCourseCode.getText();
 				if (!"".equals(courseCode)) {
 					try {
@@ -609,21 +839,19 @@ public class AppWindow {
 				} else {
 					lblCourse.setText("You forgot the course code.");
 				}
+
 			}
 		});
 
 		btnFindCourse.setBounds(464, 148, 68, 23);
 		panel_1.add(btnFindCourse);
 
+		// Remove a student from the database
 		JButton btnRemoveCourse = new JButton("Remove Course");
 		btnRemoveCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				String removeCourseCode = textField_adminCourseCode.getText();
-
-				if (removeCourseCode.isEmpty()) {
-					lblCourse.setText("Please fill in a course code.");
-				}
 
 				if (!"".equals(removeCourseCode)) {
 					try {
@@ -638,6 +866,8 @@ public class AppWindow {
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
+				} else {
+					lblCourse.setText("Please fill out the course code.");
 				}
 
 			}
@@ -646,6 +876,7 @@ public class AppWindow {
 		btnRemoveCourse.setBounds(392, 172, 140, 23);
 		panel_1.add(btnRemoveCourse);
 
+		// Add a student to a finished course and chose a grade
 		JButton btnAddStudentCourse = new JButton("Add");
 		btnAddStudentCourse.setActionCommand("");
 		btnAddStudentCourse.addActionListener(new ActionListener() {
@@ -681,10 +912,6 @@ public class AppWindow {
 						}
 					}
 
-					else {
-						lblCompletedCourse.setText("Error.");
-					}
-
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} catch (Exception e2) {
@@ -696,6 +923,7 @@ public class AppWindow {
 		btnAddStudentCourse.setBounds(392, 421, 140, 23);
 		panel_1.add(btnAddStudentCourse);
 
+		// Add student to a current course
 		JButton btnAddStudentsOnCourse = new JButton("Add");
 		btnAddStudentsOnCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -739,6 +967,7 @@ public class AppWindow {
 		btnAddStudentsOnCourse.setBounds(104, 405, 140, 23);
 		panel_1.add(btnAddStudentsOnCourse);
 
+		// Remove a student from a course
 		JButton btnRemoveStudentCourse = new JButton("Remove");
 		btnRemoveStudentCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -751,8 +980,7 @@ public class AppWindow {
 
 					Course c = controller.getCourse(removeCourseCode);
 					Studies s = controller.getAllStudies(removeSsn, removeCourseCode);
-					if (textField_adminStudentCourseSsn.getText().isEmpty()
-							|| textField_adminStudentCourseCode.getText().isEmpty()) {
+					if (removeSsn.isEmpty() || removeCourseCode.isEmpty()) {
 						lblAddRemoveStudentCourse.setText("Please fill out both fields.");
 					} else if (st == null) {
 						lblAddRemoveStudentCourse.setText("Student does not exist.");
@@ -774,12 +1002,14 @@ public class AppWindow {
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
+
 			}
 
 		});
 		btnRemoveStudentCourse.setBounds(104, 429, 140, 23);
 		panel_1.add(btnRemoveStudentCourse);
 
+		// Shows all students who are currently studying on a course in a JTable
 		JTable studentCourseList = new JTable(new DefaultTableModel(new String[] { "Ssn", "Course code" }, 0));
 		studentCourseList.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		JScrollPane studentCourseListPane = new JScrollPane(studentCourseList);
@@ -812,16 +1042,24 @@ public class AppWindow {
 		showGradeList.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		JScrollPane showGradeListPane = new JScrollPane(showGradeList);
 		panel_2.add(showGradeListPane);
-		showGradeListPane.setBounds(30, 147, 501, 97);
+		showGradeListPane.setBounds(30, 161, 501, 97);
 
+		// Shows the grade for a student on a certain course
 		JButton btnShowGrade = new JButton("Show grade");
 		btnShowGrade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
+
 					String studentSsn = comboBoxAllStudent.getSelectedItem().toString();
 					String courseCode = comboBoxAllCoursesStudent.getSelectedItem().toString();
 
+					HasStudied hasStudied = controller.getHasStudied(studentSsn, courseCode);
+
+					if (hasStudied == null) {
+						lblStudentResults.setText("This student has not studied this course.");
+
+					}
 					DefaultTableModel studentGradeTable = (DefaultTableModel) showGradeList.getModel();
 					studentGradeTable.setRowCount(0);
 					for (HasStudied hs : controller.getAllStudied(studentSsn, courseCode)) {
@@ -843,6 +1081,7 @@ public class AppWindow {
 		panel_2.add(showAllCourseListPane);
 		showAllCourseListPane.setBounds(30, 426, 501, 97);
 
+		// Show result for a finished course
 		JButton btnShowResult = new JButton("Show result");
 		btnShowResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -851,6 +1090,9 @@ public class AppWindow {
 
 				try {
 
+					if (courseCode != null) {
+						// lbl
+					}
 					DefaultTableModel courseResultTable = (DefaultTableModel) showAllCourseList.getModel();
 					courseResultTable.setRowCount(0);
 					for (HasStudied hs : controller.getAllHasStudied(courseCode)) {
